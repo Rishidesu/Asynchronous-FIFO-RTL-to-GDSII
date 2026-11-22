@@ -326,3 +326,63 @@ Asynchronous-FIFO-RTL-to-GDSII/
 **Additional signoff recommended:** CDC-specific constraints and analysis, reset-domain verification, and expanded timing/verification coverage.
 
 This project is an educational ASIC implementation and has not been fabricated in silicon.
+
+
+
+## RTL Verification & Physical Design Gallery
+
+The asynchronous FIFO was verified using Icarus Verilog and GTKWave, followed by an RTL-to-GDSII implementation using OpenLane and the Sky130 standard-cell library.
+
+### 1. RTL Functional Verification
+
+The SystemVerilog testbench verifies FIFO write/read operations, data integrity, and full/empty flag behavior across independent write and read clock domains.
+
+![RTL Simulation Waveform](Images/rtl_waveform.png)
+
+### 2. Standard-Cell Placement
+
+Placement of the synthesized asynchronous FIFO standard cells within the core area using OpenROAD.
+
+![Standard-Cell Placement](Images/placement.png)
+
+### 3. Clock Tree Synthesis (CTS)
+
+Clock Tree Synthesis was performed for the independent write and read clock domains.
+
+- Write-clock CTS buffers: **17**
+- Read-clock CTS buffers: **5**
+- Total explicitly identified CTS buffers: **22**
+
+The highlighted cells represent CTS-inserted clock buffers for the two clock domains.
+
+![Clock Tree Synthesis](Images/cts.png)
+
+### 4. Detailed Routing
+
+Physical routing of the FIFO design, showing metal interconnections across the Sky130 routing layers.
+
+![Detailed Routing](Images/routing.png)
+
+### 5. Final GDSII Layout
+
+Final GDSII layout generated through the OpenLane RTL-to-GDSII flow and visualized using KLayout.
+
+![Final GDSII Layout](Images/final_gds.png)
+
+### Physical Verification
+
+The completed OpenLane flow generated timing, DRC, and LVS reports, available in the `Reports/` directory.
+
+The final GDSII file is available at:
+
+`Results/async_fifo.gds`
+
+### Tools and Technology
+
+- **RTL:** Verilog
+- **Verification:** SystemVerilog, Icarus Verilog, GTKWave
+- **Synthesis:** Yosys
+- **Physical Design:** OpenLane, OpenROAD
+- **Technology:** SkyWater SKY130 (`sky130_fd_sc_hd`)
+- **GDSII Visualization:** KLayout
+
